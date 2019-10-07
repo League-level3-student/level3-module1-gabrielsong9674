@@ -33,11 +33,14 @@ public class _04_RemovingStuffFromArrayLists {
 		stuffIFoundInTheYard.add(new Dirt());
 
 		System.out.println(stuffIFoundInTheYard.size());
-
 		/* TODO 1: Clean out the dirt but keep the delicious worms. */
 		
-		
-		
+		for (int i = 0; i < stuffIFoundInTheYard.size(); i++) {
+			if(stuffIFoundInTheYard.get(i).type == "dirt") {
+				stuffIFoundInTheYard.remove(stuffIFoundInTheYard.get(i));
+				i = i-1;
+			}
+		}		
 		
 		System.out.println(stuffIFoundInTheYard.size()); // should be 2
 
@@ -74,8 +77,18 @@ public class _04_RemovingStuffFromArrayLists {
 		truth.add('r');
 		truth.add('#');
 		/* TODO 2: Remove the hash symbols and print out the truth. */
-
-		
-		
+		String all = "";
+		for(int i = 0; i < truth.size(); i ++)
+		{
+			if(truth.get(i).equals('#'))
+			{
+				truth.remove(i);
+				i = i-1;
+			}
+		}
+		for (Character character : truth) {
+			 all = all + character;
+		}
+		System.out.println(all);
 	}
 }

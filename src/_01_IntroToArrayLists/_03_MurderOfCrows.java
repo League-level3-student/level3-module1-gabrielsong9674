@@ -30,9 +30,19 @@ public class _03_MurderOfCrows {
          * 1. One of the Crows has eaten the diamond. You need to search through the stomach of each Crow, 
          * then print the name of the guilty Crow.
          */
-        
+    	int num = 0;
+        for (int i = 0; i < theMurder.size(); i ++) {
+			for (String things : theMurder.get(i).getStomachContents()) {
+				if(things.equals("diamond"))
+				{
+					System.out.println(theMurder.get(i).getName());
+					 num = i+1;
+				}
+			}
+			
+		}
         /* 2. How many innocent crows had to die before the diamond was found? */
-    	
+        System.out.println(num);
     }
 
     private void initializeCrows() {

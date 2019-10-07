@@ -3,8 +3,6 @@ package _01_IntroToArrayLists;
 import java.util.ArrayList;
 import java.util.Random;
 
-import javax.swing.JOptionPane;
-
 public class _05_LongChipCompetition {
 	/**
 	 * The Beatles are eating lunch and playing a game to see who has the longest
@@ -16,9 +14,24 @@ public class _05_LongChipCompetition {
 
 	public static void main(String[] args) {
 		_05_LongChipCompetition lcc = new _05_LongChipCompetition();
+		lcc.initializeBeatles();
+		lcc.findChip();
+	}
+	Beatle winner;
+	private void findChip() {
+		double length = 0;
+		
+		for (Beatle beatle : theBeatles) {
+			for (Chip chip : beatle.getChips()) {
+				if(chip.getLength() > length) {
+					length = chip.getLength();
+					winner = new Beatle(beatle.getName());
+				}
+			}
+		}
+		System.out.println(winner.getName());
 		
 	}
-	
 	private void initializeBeatles() {
 		Beatle george = new Beatle("George");
 		Beatle john = new Beatle("John");

@@ -14,10 +14,12 @@ public class _02_GuestBook implements ActionListener {
 	// When the add name button is clicked, display an input dialog that asks the user to enter a name. Add
 	// that name to an ArrayList. When the "View Names" button is clicked, display a message dialog that displays
 	// all the names added to the list. Format the list as follows:
-	// Guest #1: Bob Banders
+	// Guest #1: Bob Banders 
 	// Guest #2: Sandy Summers
 	// Guest #3: Greg Ganders
 	// Guest #4: Donny Doners
+	ArrayList<String> names = new ArrayList<String>();
+
 	public static void main(String[] args) {
 		_02_GuestBook book = new _02_GuestBook();
 		book.makeGUI();
@@ -25,7 +27,7 @@ public class _02_GuestBook implements ActionListener {
 	JFrame frame = new JFrame();
 	JPanel panel = new JPanel();
 	JButton add = new JButton("Add Name");
-	JButton view = new JButton("View Name");
+	JButton view = new JButton("View Names");
 	
 	public void makeGUI()
 	{
@@ -43,17 +45,19 @@ public class _02_GuestBook implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
 		JButton buttonPressed = (JButton) e.getSource();
-		ArrayList<String> names = new ArrayList<String>(4);
 		if(buttonPressed == add)
 		{
-			String userInput = JOptionPane.showInputDialog("Enter a name");
-			names.add(userInput);
-			
+			 names.add(JOptionPane.showInputDialog("Enter a name"));
 		}
 		if(buttonPressed == view)
 		{
-			System.out.println(names.get(0));
+			String all = "";
+			for(int i = 0; i < names.size(); i ++) {
+				all = all + "Guest #"+(i+1)+": "+names.get(i)+"\n";
+			}
+			JOptionPane.showMessageDialog(null, all);
 		}
+		
 	}
 	
 }
