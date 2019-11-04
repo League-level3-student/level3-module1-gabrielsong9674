@@ -16,6 +16,7 @@ public class HangMan implements KeyListener{
 	JFrame frame = new JFrame();
 	JPanel panel = new JPanel();
 	JLabel label = new JLabel();
+	JLabel score = new JLabel();
 	
 	Stack<String> words;
 	String userInput;
@@ -23,7 +24,8 @@ public class HangMan implements KeyListener{
 	String currentWord;
 	String  blanks = "";
 	char userKey;
-	
+	int lives = 3;
+	boolean correct;
 	public static void main(String[] args)
 	{
 		HangMan hangMan = new HangMan();
@@ -38,6 +40,8 @@ public class HangMan implements KeyListener{
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.add(panel);
 		panel.add(label);
+		panel.add(score);
+		score.setText("Lives: "+lives);
 		label.setText(blanks);
 		frame.addKeyListener(this);
 	}
@@ -58,11 +62,16 @@ public class HangMan implements KeyListener{
 		}
 		for(int i = 0; i < currentWord.length(); i ++)
 		{
-			blanks = "_ "+ blanks;
+			blanks += "_ ";
 			
-			
+
 		}
-		
+		System.out.println(currentWord);
+		if(correct == false)
+		{
+			lives--;
+		}
+
 	}
 
 	@Override
@@ -75,8 +84,23 @@ public class HangMan implements KeyListener{
 	public void keyPressed(KeyEvent e) {
 		// TODO Auto-generated method stub
 		userKey = e.getKeyChar();
+		for(int i = 0; i < currentWord.length(); i ++)
+		{
+			if(userKey == currentWord.charAt(i))
+			{
+				blanks = blanks.substring(0, i*2) + userKey + blanks.substring(i*2+1);
+				label.setText(blanks);
+				correct = true;
+			}
+			else
+			{
+				correct = false;
+			}
+			
+		}
+		
 	}
-
+	
 	@Override
 	public void keyReleased(KeyEvent e) {
 		// TODO Auto-generated method stub
