@@ -1,7 +1,15 @@
 package _06_Intro_To_Hash_Maps;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.HashMap;
 
-public class _02_LogSearch {
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+
+public class _02_LogSearch implements ActionListener {
   /* 
 	 * Crate a HashMap of Integers for the keys and Strings for the values.
 	 * Create a GUI with three buttons. 
@@ -30,4 +38,64 @@ public class _02_LogSearch {
 	 *
 	 * */
 	
+	public static void main(String[] args) 
+	{
+		_02_LogSearch logSearch = new _02_LogSearch();
+		logSearch.makeGUI();
+		
+		
+	}
+	
+	JFrame frame = new JFrame();
+	JPanel panel = new JPanel();
+	JButton addEntry = new JButton();
+	JButton searchByID = new JButton();
+	JButton viewList = new JButton();
+	JButton removeEntry = new JButton();
+	public void makeGUI()
+	{
+		frame.setVisible(true);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setSize(500, 500);
+		frame.add(panel);
+		panel.add(addEntry);
+		addEntry.addActionListener(this);
+		addEntry.setText("Add Entry");
+		panel.add(searchByID);
+		searchByID.addActionListener(this);
+		searchByID.setText("Search By ID");
+		panel.add(viewList);
+		viewList.addActionListener(this);
+		viewList.setText("View List");
+	}
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		// TODO Auto-generated method stub
+		JButton buttonPressed = (JButton) e.getSource();
+		HashMap<Integer, String> search = new HashMap<Integer, String>();
+		if(buttonPressed == addEntry)
+		{
+			String userInputID = JOptionPane.showInputDialog("Enter ID number");
+			int userID = Integer.parseInt(userInputID);
+			String userName = JOptionPane.showInputDialog("Enter a name");
+			search.put(userID, userName);
+		}
+		if(buttonPressed == searchByID)
+		{
+			String userInputID = JOptionPane.showInputDialog("Enter ID number");
+			int userID = Integer.parseInt(userInputID);
+			for(Integer i : search.keySet())
+			{
+				if(userID == i)
+				{
+					System.out.println(search.get(i));
+				}
+			}
+			
+		}
+		if(buttonPressed == viewList)
+		{
+			
+		}
+	}
 }
