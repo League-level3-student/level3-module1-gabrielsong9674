@@ -43,9 +43,8 @@ public class _02_LogSearch implements ActionListener {
 		_02_LogSearch logSearch = new _02_LogSearch();
 		logSearch.makeGUI();
 		
-		
 	}
-	
+	HashMap<Integer, String> search = new HashMap<Integer, String>();
 	JFrame frame = new JFrame();
 	JPanel panel = new JPanel();
 	JButton addEntry = new JButton();
@@ -56,7 +55,7 @@ public class _02_LogSearch implements ActionListener {
 	{
 		frame.setVisible(true);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.setSize(500, 500);
+		frame.setSize(500, 200);
 		frame.add(panel);
 		panel.add(addEntry);
 		addEntry.addActionListener(this);
@@ -67,35 +66,80 @@ public class _02_LogSearch implements ActionListener {
 		panel.add(viewList);
 		viewList.addActionListener(this);
 		viewList.setText("View List");
+		panel.add(removeEntry);
+		removeEntry.addActionListener(this);
+		removeEntry.setText("Remove Entry");
+		
 	}
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
 		JButton buttonPressed = (JButton) e.getSource();
-		HashMap<Integer, String> search = new HashMap<Integer, String>();
+		
 		if(buttonPressed == addEntry)
 		{
 			String userInputID = JOptionPane.showInputDialog("Enter ID number");
 			int userID = Integer.parseInt(userInputID);
 			String userName = JOptionPane.showInputDialog("Enter a name");
 			search.put(userID, userName);
+			System.out.println(userID);
+			System.out.println(userName);
 		}
 		if(buttonPressed == searchByID)
 		{
 			String userInputID = JOptionPane.showInputDialog("Enter ID number");
 			int userID = Integer.parseInt(userInputID);
+			boolean exists = false;
 			for(Integer i : search.keySet())
 			{
 				if(userID == i)
 				{
-					System.out.println(search.get(i));
+					JOptionPane.showMessageDialog(null, search.get(i));
+					exists = true;
 				}
+				else
+				{
+					exists = false;
+
+				}
+			}
+			if(!exists)
+			{
+				JOptionPane.showMessageDialog(null, "Does not exist");
 			}
 			
 		}
 		if(buttonPressed == viewList)
 		{
-			
+			String list = "";
+			for(Integer i : search.keySet())
+			{
+				list = "ID: " + i + " Name: " + search.get(i) + "\n" + list;
+			}
+			JOptionPane.showMessageDialog(null, list);
+		
+		}
+		if(buttonPressed == removeEntry)
+		{
+			String userInputID = JOptionPane.showInputDialog("Enter ID number");
+			int userID = Integer.parseInt(userInputID);
+			boolean exists = false;
+			for(Integer i : search.keySet()) 
+			{
+				if(userID == i)
+				{
+					search.remove(i);
+					exists = true;
+				}
+				else
+				{
+					exists = false;
+				}
+			}
+			if(!exists)
+			{
+				JOptionPane.showMessageDialog(null, "Does not exist");
+			}
 		}
 	}
 }
